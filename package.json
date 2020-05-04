@@ -1,0 +1,37 @@
+{
+  "name": "nodejs-passport-login",
+  "version": "1.0.0",
+  "description": "a nodejs backend and local authentication using passport.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarekda1/nodejs-passport-demo.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "passport.js"
+  ],
+  "author": "tarek daaboul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tarekda1/nodejs-passport-demo/issues"
+  },
+  "homepage": "https://github.com/Tarekda1/nodejs-passport-demo#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.11",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}

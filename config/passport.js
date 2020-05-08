@@ -14,7 +14,6 @@ module.exports = function(passport) {
         if (!user) {
           return done(null, false, { message: "Invalid email" });
         }
-
         //if user is found then we match passwords
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;

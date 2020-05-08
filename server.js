@@ -51,11 +51,15 @@ app.use(function(req, res, next) {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
+  res.locals.success_msg_logout = req.flash("success_msg_logout");
   next();
 });
 
 //Mounting Routes to app
 app.use("/", require("./routes/index.js"));
+app.get("/login", (req, res) => {
+  res.redirect("/users/login");
+});
 app.use("/users", require("./routes/users.js"));
 
 //define a port the application will listen on

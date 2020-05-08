@@ -41,14 +41,53 @@ router.post("/register", forwardAuthentication, (req, res) => {
     res.render("register", { errors, name, email, password, password2 });
   } else {
     //check if user exits
-    User.find({ email: email }).then(user => {
+    User.findOne({ email: email }).then(user => {
+      //console.log(user);
       //if email already exits
       if (user) {
         errors.push({ msg: "Email already exists" });
-        res.render("register", { errors, name, email, password, passowrd2 });
+        res.render("register", { errors, name, email, password, password2 });
+      } else {
+        const newUser = new User({
+          name,
+          email,
+          password
+        });
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(user => {
+                console.log(user.password);
+                req.flash("success_msg", "You are now registered");
+                res.redirect("/users/login");
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          });
+        });
       }
     });
   }
+});
+
+router.post("/login", (req, res, next) => {
+  //use passport for local authentication
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/users/login",
+    failureFlash: true
+  })(req, res, next);
+});
+
+router.get("/logout", (req, res) => {
+  //logout from session
+  req.logout();
+  req.flash("success_msg_logout", "You are logged out");
+  res.redirect("/users/login");
 });
 
 //add other routes...
